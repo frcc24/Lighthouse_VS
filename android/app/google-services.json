@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "744617258306",
+    "project_id": "lh-virtual-store",
+    "storage_bucket": "lh-virtual-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:744617258306:android:a72de8bf4d7aa86a5aacdb",
+        "android_client_info": {
+          "package_name": "lighthousegeek.com.br.lh_virtual_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "744617258306-7v5m40tbrf186945fchnpvilgsmpgnr6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA56GsLqttyNX1fHzNKNFyKVhBz4LBcnjs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "744617258306-7v5m40tbrf186945fchnpvilgsmpgnr6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
