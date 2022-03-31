@@ -3,11 +3,23 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:lh_virtual_store/datas/product_data.dart';
 
-class ProductScreen extends StatelessWidget {
+class ProductScreen extends StatefulWidget {
+
+  final ProductData product;
+
+  ProductScreen(this.product);
+
+  @override
+  _ProductScreenState createState() => _ProductScreenState(this.product) ;
+
+}
+
+class _ProductScreenState extends State <ProductScreen>{
 
   final ProductData productData;
+  String collection = "";
 
-  ProductScreen(this.productData);
+  _ProductScreenState(this.productData);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +48,7 @@ class ProductScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -54,6 +66,57 @@ class ProductScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    const SizedBox(height: 16.0),
+                    const Text("Coleções",
+                      style:  TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 24,
+                        child: GridView(
+                          padding: const EdgeInsets.symmetric(vertical: 4.0),
+                          scrollDirection: Axis.horizontal,
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            mainAxisSpacing: 8.0,
+                            childAspectRatio: 0.4,
+                          ),
+                          children:
+                            productData.collections.map(
+                                    (s) {
+                              return GestureDetector(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+                                      border: Border.all(
+                                        color: s == collection ? Colors.red : Colors.grey,
+                                        width: 2.0,
+                                      )
+                                  ),
+                                  width: 50.0,
+                                  alignment: Alignment.center,
+                                  child: Text(s),
+                                ),
+                                onTap: (){
+                                  setState(()
+                                  {collection = s;});
+                                },
+                              );
+                            }
+                            ).toList(),
+                        ),
+                    ),
+                    const SizedBox(height: 16.0,),
+                    SizedBox(height: 44.0,
+                    child: RaisedButton(
+                      onPressed: collection != "" ? (){} : null,
+                      child: Text("Colocar no carrinho", style: TextStyle( fontSize: 16.0, color: Colors.white),),
+                      color: Colors.red,
+                    ),
+                    ),
                   ],
                 ),
               ),
@@ -61,4 +124,6 @@ class ProductScreen extends StatelessWidget {
           ),
     );
   }
+
+
 }
