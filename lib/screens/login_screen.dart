@@ -12,11 +12,16 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passController = TextEditingController();
+  final _scafoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scafoldKey,
         appBar: AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
           centerTitle: true,
           title: Text("Entrar"),
           actions: [
@@ -41,6 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: ListView(
                         children: [
                           TextFormField(
+                            controller: _emailController,
                             validator: (text){
                               if (text!.isEmpty || !text.contains("@")) {
                                 return "Email inválido";
@@ -56,6 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           const SizedBox(height: 16,),
                           TextFormField(
+                            controller: _passController,
                             validator: (text){
                               if(text!.isEmpty || text.length < 6) {
                                 return "Senha invalida";
@@ -86,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onPressed: (){
                                   if(_formKey.currentState!.validate())
                                   {}
-                                  model.singIn();
+                                  model.singIn(email: _emailController.text, pass: _passController.text, onSuccess: onSuccess, onFail: onFail);
                                 },
                                 child: Text("Entrar", style: TextStyle(color: Colors.white, fontSize: 18),),
                               ),
@@ -100,4 +107,34 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+  void onSuccess(){
+    // _scafoldKey.currentState!.showSnackBar(
+    //     SnackBar(
+    //       content: Text("Usuario Logado com sucesso!",
+    //         style: TextStyle(color: Colors.blue[900]),),
+    //       backgroundColor: Colors.white70,
+    //       duration: Duration(seconds: 2),
+    //     ));
+
+      Navigator.of(context).pop();
+
+
+  }
+  void onFail(){
+    _scafoldKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text("Falha No login!!",
+            style: TextStyle(color: Colors.red),),
+          backgroundColor: Colors.white70,
+          duration: Duration(seconds: 2),
+        ));
+
+    // Future.delayed((const Duration(seconds: 2))).then((value){
+    //   Navigator.of(context).pop();
+    // });
+
+  }
+
+
 }

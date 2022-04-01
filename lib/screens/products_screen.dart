@@ -16,6 +16,7 @@ class ProductsScreen extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: Theme.of(context).primaryColor,
             title: Text(snapshot.get("title")),
             centerTitle: true,
             bottom: const TabBar(

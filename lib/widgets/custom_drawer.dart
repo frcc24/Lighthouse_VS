@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lh_virtual_store/models/user_model.dart';
 import 'package:lh_virtual_store/screens/login_screen.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 import '../tiles/drawer_tile.dart';
 class CustomDrawer extends StatelessWidget {
 
   final PageController pageController;
 
-  CustomDrawer(this.pageController);
+  const CustomDrawer(this.pageController);
 
   Widget _buildDrawerBack() => Container(
     decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Color.fromARGB(255, 100, 100, 100),
+            Color.fromARGB(255, 44, 49, 59),
             Colors.white
           ],
           begin: Alignment.topLeft,
@@ -36,7 +38,7 @@ class CustomDrawer extends StatelessWidget {
                 height: 170.0,
                 child: Stack(
                   children: [
-                    Positioned(
+                    const Positioned(
                       top: 18.0,
                       left: 10.0,
                     child: Text("Lighthouse\nGeek Store",
@@ -50,28 +52,39 @@ class CustomDrawer extends StatelessWidget {
                     Positioned(
                         left: 10.0,
                         bottom: 0.0,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                           Text("Olá nerd,",
-                              style: TextStyle(
-                                  fontSize: 18.0,
-                                color: Colors.white,
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: (){
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
-                              },
-                              child: Text("Entre ou cadastre-se +",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),),
-                            ),
-                          ],
-                        ),
+                        child: ScopedModelDescendant<UserModel>(
+                         builder: (context, child, model) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text("Olá, ${!model.isLoggedIn() ? "nerd!" : model.userData['nome']}",
+                                  style: const TextStyle(
+                                    fontSize: 18.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: (){
+                                    if(!model.isLoggedIn())
+                                      {
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginScreen()));
+                                      }else{
+                                      model.signOut();
+                                    }
+                                  },
+                                  child: Text(
+                                    !model.isLoggedIn() ?
+                                    "Entre ou cadastre-se +" : "Sair",
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),),
+                                ),
+                              ],
+                            );
+                         }),
+
                     ),
                   ],
                 ),

@@ -17,13 +17,15 @@ class _NewUserScreenState extends State<NewUserScreen> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
-
+  final _scafoldKey = GlobalKey<ScaffoldState>();
   String? password;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scafoldKey,
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         centerTitle: true,
         title: Text("Criar uma nova conta"),
         actions: [
@@ -145,7 +147,31 @@ class _NewUserScreenState extends State<NewUserScreen> {
   }
 
   void onSuccess(){
+    _scafoldKey.currentState!.showSnackBar(
+        SnackBar(
+          content: Text("Usuario criado com sucesso!",
+                    style: TextStyle(color: Colors.blue[900]),),
+          backgroundColor: Colors.white70,
+          duration: Duration(seconds: 2),
+    ));
+
+    Future.delayed((const Duration(seconds: 2))).then((value){
+      Navigator.of(context).pop();
+    });
 
   }
-  void onFail(){}
+  void onFail(){
+    _scafoldKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text("Falha ao criar Usuario",
+            style: TextStyle(color: Colors.red),),
+          backgroundColor: Colors.white70,
+          duration: Duration(seconds: 2),
+        ));
+
+    // Future.delayed((const Duration(seconds: 2))).then((value){
+    //   Navigator.of(context).pop();
+    // });
+
+  }
 }

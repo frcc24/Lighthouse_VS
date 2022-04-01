@@ -36,7 +36,7 @@ class HomeTab extends StatelessWidget {
                  backgroundColor: Colors.transparent,
                  elevation: 0.0,
                  flexibleSpace: FlexibleSpaceBar(
-                   title: Text("tela home"),
+                   title: Text("Novidades"),
                    centerTitle: true,
 
                  ),

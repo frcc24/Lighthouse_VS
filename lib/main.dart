@@ -2,7 +2,6 @@
 
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lh_virtual_store/models/user_model.dart';
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
         title: 'LH Virtual Store',
         theme: ThemeData(
           primarySwatch: Colors.red,
-          primaryColor: Colors.red[900],
+          primaryColor:  const Color.fromARGB(255, 215, 31, 40),
 
         ),
         debugShowCheckedModeBanner: false,
