@@ -25,8 +25,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'LH Virtual Store',
         theme: ThemeData(
-          primarySwatch: Colors.red,
-          primaryColor:  const Color.fromARGB(255, 215, 31, 40),
+          dividerColor: const Color.fromARGB(255, 44, 57, 75) ,
+          accentColor: const Color.fromARGB(255, 51, 71, 86),
+          primaryColor:  const Color.fromARGB(255, 255, 76, 41),
+          secondaryHeaderColor: const Color.fromARGB(255, 210, 210, 210),
+          primaryColorDark: const Color.fromARGB(255, 8, 32, 50),
 
         ),
         debugShowCheckedModeBanner: false,

@@ -15,8 +15,8 @@ class CustomDrawer extends StatelessWidget {
     decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Color.fromARGB(255, 44, 49, 59),
-            Colors.white
+            Color.fromARGB(255, 194, 191, 191),
+            Color.fromARGB(255, 8, 32, 50)
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomCenter,
@@ -79,7 +79,8 @@ class CustomDrawer extends StatelessWidget {
                                       color: Colors.white,
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold,
-                                    ),),
+                                    ),
+                                  ),
                                 ),
                               ],
                             );
@@ -96,7 +97,7 @@ class CustomDrawer extends StatelessWidget {
               const Divider(),
               DrawerTile(FontAwesomeIcons.locationArrow, "Localizar a loja", pageController,2),
               const Divider(),
-              DrawerTile(Icons.power_off, "Entre ou cadastre-se", pageController,3),
+              DrawerTile(Icons.policy, "Politica de Privacidade", pageController,3),
 
             ],
           ),
