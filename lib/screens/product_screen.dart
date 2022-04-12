@@ -1,7 +1,14 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:lh_virtual_store/datas/cart_product_data.dart';
 import 'package:lh_virtual_store/datas/product_data.dart';
+import 'package:lh_virtual_store/models/cart_model.dart';
+import 'package:lh_virtual_store/models/user_model.dart';
+import 'package:lh_virtual_store/screens/cart_screen.dart';
+import 'package:lh_virtual_store/screens/login_screen.dart';
+
+import '../widgets/cart_button.dart';
 
 class ProductScreen extends StatefulWidget {
 
@@ -24,7 +31,9 @@ class _ProductScreenState extends State <ProductScreen>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: AppBar(
+      floatingActionButton: CartButton(),
+
+      appBar: AppBar(
             backgroundColor: Theme.of(context).primaryColor,
             title: Text(productData.title),
             centerTitle: true,
@@ -113,8 +122,26 @@ class _ProductScreenState extends State <ProductScreen>{
                     const SizedBox(height: 16.0,),
                     SizedBox(height: 44.0,
                     child: RaisedButton(
-                      onPressed: collection != "" ? (){} : null,
-                      child: Text("Colocar no carrinho", style: TextStyle( fontSize: 16.0, color: Colors.white),),
+                      onPressed: collection != "" ? (){
+                        if(UserModel.of(context).isLoggedIn()){
+
+                          CartProduct cartProduct = CartProduct();
+                          cartProduct.collection = collection;
+                          cartProduct.quantity = 1;
+                          cartProduct.productId = productData.id;
+                          cartProduct.category = productData.category;
+
+                          cartProduct.productData = productData;
+
+                          CartModel.of(context).addCartItem(cartProduct);
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CartScreen()));
+
+
+                        }else{
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> LoginScreen()));
+                        }
+                      } : null,
+                      child: Text(UserModel.of(context).isLoggedIn() ? "Colocar no carrinho" : "Entre para comprar", style: TextStyle( fontSize: 16.0, color: Colors.white),),
                       color: Colors.red,
                     ),
                     ),

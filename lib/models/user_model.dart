@@ -6,11 +6,12 @@ import 'package:scoped_model/scoped_model.dart';
 class UserModel extends Model{
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? _firebaseUser = null;
+  User? firebaseUser;
   Map<String, dynamic> userData = Map();
 
   bool isLoading = false;
 
+  static UserModel of(BuildContext context) => ScopedModel.of<UserModel>(context);
 
   @override
   void addListener(VoidCallback listener) {
@@ -27,7 +28,7 @@ class UserModel extends Model{
         password: pass
 
     ).then((user) async {
-        _firebaseUser = _auth.currentUser!;
+        firebaseUser = _auth.currentUser!;
         onSuccess();
        await _saveUserData(userData);
         print(user);
@@ -49,9 +50,9 @@ class UserModel extends Model{
     notifyListeners();
 
      _auth.signInWithEmailAndPassword(email: email, password: pass).then((user) async{
-       _firebaseUser = _auth.currentUser!;
+       firebaseUser = _auth.currentUser!;
         onSuccess();
-       print("\n===============\nLogin usuario: $_firebaseUser\n=================\n");
+       print("\n===============\nLogin usuario: $firebaseUser\n=================\n");
        await loadCurrentUser();
        isLoading = false;
        notifyListeners();
@@ -72,12 +73,13 @@ class UserModel extends Model{
 
   }
 
-  void recoverPass(){
+  void recoverPass(String email){
+    _auth.sendPasswordResetEmail(email: email);
 
   }
 
   bool isLoggedIn(){
-    if(_firebaseUser != null) {
+    if(firebaseUser != null) {
       return true;
     } else {
       return false;
@@ -86,14 +88,14 @@ class UserModel extends Model{
 
   Future<Null> _saveUserData(Map<String, dynamic> userData) async{
       this.userData = userData;
-      await FirebaseFirestore.instance.collection("users").doc(_firebaseUser!.uid).set(userData);
+      await FirebaseFirestore.instance.collection("users").doc(firebaseUser!.uid).set(userData);
   }
 
   Future<Null> loadCurrentUser() async{
 
-    if(_firebaseUser != null) {
+    if(firebaseUser != null) {
       DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection(
-          "users").doc(_firebaseUser!.uid).get();
+          "users").doc(firebaseUser!.uid).get();
       if(userDoc.exists){
         userData = userDoc.data() as Map<String, dynamic> ;
       }
@@ -108,7 +110,7 @@ class UserModel extends Model{
   void signOut() async{
     await _auth.signOut();
     userData = {};
-    _firebaseUser = null;
+    firebaseUser = null;
     notifyListeners();
 
   }

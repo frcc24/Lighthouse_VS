@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:lh_virtual_store/datas/product_data.dart';
 import 'package:lh_virtual_store/tiles/product_tile.dart';
 
+import '../widgets/cart_button.dart';
+
 class ProductsScreen extends StatelessWidget {
 
   final DocumentSnapshot snapshot;
@@ -15,6 +17,7 @@ class ProductsScreen extends StatelessWidget {
     return DefaultTabController(
         length: 2,
         child: Scaffold(
+          floatingActionButton: CartButton(),
           appBar: AppBar(
             backgroundColor: Theme.of(context).primaryColor,
             title: Text(snapshot.get("title")),
@@ -47,14 +50,18 @@ class ProductsScreen extends StatelessWidget {
                         ),
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context, index){
-                          return ProductTile("grid", ProductData.fromDocument(snapshot.data!.docs[index]));
+                          ProductData data = ProductData.fromDocument(snapshot.data!.docs[index]);
+                          data.category = this.snapshot.id;
+                          return ProductTile("grid", data);
                         },
                       ),
                       ListView.builder(
                           padding: EdgeInsets.all(4),
                           itemCount: snapshot.data!.docs.length,
                           itemBuilder: (context, index){
-                            return ProductTile("list", ProductData.fromDocument(snapshot.data!.docs[index]));
+                            ProductData data = ProductData.fromDocument(snapshot.data!.docs[index]);
+                            data.category = this.snapshot.id;
+                            return ProductTile("list", data);
                           }
                       ),
                     ],
