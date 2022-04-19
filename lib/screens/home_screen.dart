@@ -14,10 +14,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageView(
       controller: _pageController,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       children: <Widget>[
         Scaffold(
-          floatingActionButton: CartButton(),
+          floatingActionButton: const CartButton(),
 
           body: HomeTab(),
           drawer: CustomDrawer(_pageController),
@@ -26,10 +26,10 @@ class HomeScreen extends StatelessWidget {
           drawer: CustomDrawer(_pageController),
           appBar: AppBar(
               backgroundColor: Theme.of(context).primaryColor,
-              title: Text('Coleções'),
+              title: const Text('Coleções'),
             centerTitle: true,
           ),
-          body: ProductsTab(),
+          body: const ProductsTab(),
         ),
         Container(color: Colors.green,),
         Container(color: Colors.red,),

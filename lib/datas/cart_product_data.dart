@@ -9,7 +9,7 @@ class CartProduct{
     int quantity = 0;
     String collection = "";
 
-    late ProductData productData ;
+    ProductData? productData;
 
     CartProduct();
 
@@ -28,7 +28,7 @@ class CartProduct{
         "productId":  productId,
         "quantity":  quantity,
         "collection":  collection,
-        "product": productData.toResumeMap()
+        "product": productData!.toResumeMap()
       };
     }
 

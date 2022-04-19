@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
                 primaryColor:  const Color.fromARGB(255, 255, 76, 41),
                 secondaryHeaderColor: const Color.fromARGB(255, 210, 210, 210),
                 primaryColorDark: const Color.fromARGB(255, 8, 32, 50),
-
+                visualDensity: VisualDensity.adaptivePlatformDensity,
               ),
               debugShowCheckedModeBanner: false,
               home: HomeScreen(),

@@ -2,12 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lh_virtual_store/datas/cart_product_data.dart';
 import 'package:lh_virtual_store/datas/product_data.dart';
+import 'package:lh_virtual_store/models/cart_model.dart';
 
 class CartTile extends StatelessWidget {
 
   CartProduct cartProduct;
 
-  CartTile(this.cartProduct);
+  BuildContext context;
+
+  CartTile(this.cartProduct, this.context);
 
 
   @override
@@ -41,28 +44,30 @@ class CartTile extends StatelessWidget {
     return Row(
       children: [
         Container(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           width: 120.0,
-          child: Image.network(cartProduct.productData.images[0]),
+          child: Image.network(cartProduct.productData?.images[0]),
         ),
         Expanded(
             child: Container(
 
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column (
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(cartProduct.productData.title, style: TextStyle(fontSize: 20),),
+                  Text(cartProduct.productData!.title, style: const TextStyle(fontSize: 20),),
                   Text(cartProduct.collection),
-                  Text("R\$ ${cartProduct.productData.price.toStringAsFixed(2)}"),
+                  Text("R\$ ${cartProduct.productData!.price.toStringAsFixed(2)}"),
 
                   Row(
                     children: [
-                      IconButton(onPressed: cartProduct.quantity > 1 ? (){ } : null, icon: Icon(Icons.remove)),
+                      IconButton(
+                          onPressed: cartProduct.quantity > 1 ? (){ CartModel.of(context).decProduct(cartProduct); } : null,
+                          icon: const Icon(Icons.remove)),
                       Text(cartProduct.quantity.toString()),
-                      IconButton(onPressed: (){}, icon: Icon(Icons.add)),
-                      FlatButton(onPressed: (){}, child: Text("remover"),)
+                      IconButton(onPressed: (){ CartModel.of(context).incProduct(cartProduct);}, icon: Icon(Icons.add)),
+                      FlatButton(onPressed: (){ CartModel.of(context).removeCartProduct(cartProduct);}, child: Text("remover"),)
 
                     ],
                   ),

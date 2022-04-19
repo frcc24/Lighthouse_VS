@@ -50,8 +50,8 @@ android {
         applicationId "lighthousegeek.com.br.lh_virtual_store"
         minSdkVersion 20
         targetSdkVersion 32
-        versionCode 1
-        versionName "Flutter 0.1 beta"
+        versionCode 2
+        versionName "Flutter 0.2 beta"
 
         multiDexEnabled true
     }
