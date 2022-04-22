@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "744617258306",
+    "firebase_url": "https://lh-virtual-store-default-rtdb.firebaseio.com",
     "project_id": "lh-virtual-store",
     "storage_bucket": "lh-virtual-store.appspot.com"
   },
@@ -29,6 +30,13 @@
             {
               "client_id": "744617258306-7v5m40tbrf186945fchnpvilgsmpgnr6.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "744617258306-jgv9q9feep0h76tj66deup79tvtmqr1s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "lighthousegeek.com.br.lhVirtualStore"
+              }
             }
           ]
         }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>744617258306-jgv9q9feep0h76tj66deup79tvtmqr1s.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.744617258306-jgv9q9feep0h76tj66deup79tvtmqr1s</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAICovZIfrUIS6hPRQzn3qPL3xOAqcyJBA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>744617258306</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>lighthousegeek.com.br.lhVirtualStore</string>
+	<key>PROJECT_ID</key>
+	<string>lh-virtual-store</string>
+	<key>STORAGE_BUCKET</key>
+	<string>lh-virtual-store.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:744617258306:ios:488d3124edc612705aacdb</string>
+</dict>
+</plist>
