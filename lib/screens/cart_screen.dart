@@ -4,6 +4,7 @@ import 'package:lh_virtual_store/models/user_model.dart';
 import 'package:lh_virtual_store/screens/login_screen.dart';
 import 'package:lh_virtual_store/tiles/cart_tile.dart';
 import 'package:lh_virtual_store/widgets/cart_button.dart';
+import 'package:lh_virtual_store/widgets/cart_price.dart';
 import 'package:lh_virtual_store/widgets/discount_card.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -74,6 +75,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               DiscountCard(),
               ShippingCard(),
+                CartPrice((){}),
               ],
             );
           }
