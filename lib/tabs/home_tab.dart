@@ -44,7 +44,7 @@ class HomeTab extends StatelessWidget {
                FutureBuilder<QuerySnapshot>(
                  future: FirebaseFirestore.instance.collection("images").orderBy("pos").get(),
                  builder: (context, snapshot) {
-                   if(!snapshot.hasData) {
+                   if (!snapshot.hasData) {
                      return SliverToBoxAdapter(
                        child: Container(
                          height: 200.0,
@@ -58,8 +58,8 @@ class HomeTab extends StatelessWidget {
                      {
                        return SliverMasonryGrid.count(
                          crossAxisCount: 2,
-                         mainAxisSpacing: 0.8,
-                         crossAxisSpacing: 0.8,
+                         mainAxisSpacing: 2,
+                         crossAxisSpacing: 4,
                          itemBuilder: (context, index) {
                            return FadeInImage.memoryNetwork(
                                placeholder: kTransparentImage,
