@@ -1,6 +1,7 @@
 // @dart=2.9
 
 import 'dart:async';
+// import 'dart:html';
 
 
 import 'package:firebase_core/firebase_core.dart';
@@ -34,12 +35,10 @@ class MyApp extends StatelessWidget {
             child: MaterialApp(
               title: 'LH Virtual Store',
               theme: ThemeData(
-                dividerColor: const Color.fromARGB(255, 44, 57, 75) ,
-                accentColor: const Color.fromARGB(255, 51, 71, 86),
-                primaryColor:  const Color.fromARGB(255, 255, 76, 41),
-                secondaryHeaderColor: const Color.fromARGB(255, 210, 210, 210),
-                primaryColorDark: const Color.fromARGB(255, 8, 32, 50),
-                visualDensity: VisualDensity.adaptivePlatformDensity,
+                useMaterial3: true,
+                colorSchemeSeed: Colors.red[500],
+                brightness: Brightness.light,
+
               ),
               debugShowCheckedModeBanner: false,
               home: HomeScreen(),
