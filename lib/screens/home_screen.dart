@@ -18,22 +18,17 @@ class HomeScreen extends StatelessWidget {
       children: <Widget>[
         Scaffold(
           floatingActionButton: const CartButton(),
-
           body: HomeTab(),
           drawer: CustomDrawer(_pageController),
         ),
         Scaffold(
           drawer: CustomDrawer(_pageController),
           appBar: AppBar(
-              backgroundColor: Theme.of(context).primaryColor,
-              title: const Text('Coleções'),
+            title: const Text('Coleções'),
             centerTitle: true,
           ),
           body: const ProductsTab(),
         ),
-        Container(color: Colors.green,),
-        Container(color: Colors.red,),
-        Container(color: Colors.blue,),//
       ],
     );
   }

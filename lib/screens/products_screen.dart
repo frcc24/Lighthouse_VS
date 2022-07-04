@@ -6,11 +6,9 @@ import 'package:lh_virtual_store/tiles/product_tile.dart';
 import '../widgets/cart_button.dart';
 
 class ProductsScreen extends StatelessWidget {
-
   final DocumentSnapshot snapshot;
 
   ProductsScreen(this.snapshot);
-
 
   @override
   Widget build(BuildContext context) {
@@ -19,38 +17,43 @@ class ProductsScreen extends StatelessWidget {
         child: Scaffold(
           floatingActionButton: CartButton(),
           appBar: AppBar(
-            backgroundColor: Theme.of(context).primaryColor,
+            // backgroundColor: Theme.of(context).primaryColor,
             title: Text(snapshot.get("title")),
             centerTitle: true,
             bottom: const TabBar(
-              tabs: [ Icon( Icons.grid_on), Icon(Icons.list)],
+              tabs: [Icon(Icons.grid_on), Icon(Icons.list)],
               indicatorColor: Colors.white,
             ),
           ),
-          body: FutureBuilder <QuerySnapshot> (
-            future: FirebaseFirestore.instance.
-                    collection("products").doc(snapshot.id).collection("items").get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return Container(
+          body: FutureBuilder<QuerySnapshot>(
+              future: FirebaseFirestore.instance
+                  .collection("products")
+                  .doc(snapshot.id)
+                  .collection("items")
+                  .get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Container(
                     alignment: Alignment.center,
                     child: const CircularProgressIndicator(),
                   );
-                } else{
-                return TabBarView(
-                  physics: const NeverScrollableScrollPhysics(),
+                } else {
+                  return TabBarView(
+                    physics: const NeverScrollableScrollPhysics(),
                     children: [
                       GridView.builder(
                         padding: const EdgeInsets.all(4.0),
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           mainAxisSpacing: 4,
                           crossAxisSpacing: 4,
                           childAspectRatio: 0.65,
                         ),
                         itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index){
-                          ProductData data = ProductData.fromDocument(snapshot.data!.docs[index]);
+                        itemBuilder: (context, index) {
+                          ProductData data = ProductData.fromDocument(
+                              snapshot.data!.docs[index]);
                           data.category = this.snapshot.id;
                           return ProductTile("grid", data);
                         },
@@ -58,18 +61,16 @@ class ProductsScreen extends StatelessWidget {
                       ListView.builder(
                           padding: EdgeInsets.all(4),
                           itemCount: snapshot.data!.docs.length,
-                          itemBuilder: (context, index){
-                            ProductData data = ProductData.fromDocument(snapshot.data!.docs[index]);
+                          itemBuilder: (context, index) {
+                            ProductData data = ProductData.fromDocument(
+                                snapshot.data!.docs[index]);
                             data.category = this.snapshot.id;
                             return ProductTile("list", data);
-                          }
-                      ),
+                          }),
                     ],
-                );
-              }
-            }),
-          )
-        );
-
+                  );
+                }
+              }),
+        ));
   }
 }
